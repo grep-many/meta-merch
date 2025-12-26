@@ -1,5 +1,3 @@
+const Canvas = () => <div>Canvas</div>;
 
-const Canvas = () => 
-    <div>Canvas</div>
-
-export default Canvas
+export default Canvas;
