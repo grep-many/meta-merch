@@ -7,7 +7,7 @@ import {
   slideAnimation,
 } from "@/config/motion";
 import state from "@/store";
-import { Button } from "@/components/ui";
+import { Button } from "@/components";
 
 const Home = () => {
   const { intro } = useSnapshot(state);
@@ -32,11 +32,12 @@ const Home = () => {
                 <strong>Unleash your imagination</strong> and define your own style.
               </p>
               <Button
-                type="filled"
-                title="Customize it"
-                handleClick={() => (state.intro = false)}
+                variant="filled"
+                onClick={() => (state.intro = false)}
                 className="w-fit px-4 py-2.5 text-sm font-bold"
-              />
+              >
+                Customize it
+              </Button>
             </motion.div>
           </motion.div>
         </motion.section>
