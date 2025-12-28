@@ -1,21 +1,32 @@
-import React from "react";
 import { Canvas } from "@react-three/fiber";
-import { Environment, Center } from "@react-three/drei";
+import { Center, Environment } from "@react-three/drei";
+
+import Shirt from "./Shirt";
 import Backdrop from "./Backdrop";
 import CameraRig from "./CameraRig";
-import Shirt from "./Shirt";
+import { useSnapshot } from "valtio";
+import state from "@/store";
 
-const Canvas3D = () => (
-  <Canvas>
-    <ambientLight intensity={0.5} />
-    <Environment preset="city" />
-    {/* <CameraRig> */}
-    {/* <Backdrop /> */}
-    <Center>
-      <Shirt />
-    </Center>
-    {/* </CameraRig> */}
-  </Canvas>
-);
+const CanvasModel = () => {
+  const { intro } = useSnapshot(state);
+  return (
+    <Canvas
+      shadows
+      camera={{ position: [0, 0, 0], fov: 25 }}
+      gl={{ preserveDrawingBuffer: true }}
+      className={`lg h-[70vh]! w-full transition-all ease-in ${intro ? "top-[50vh] lg:top-[15vh] lg:left-60" : "top-[15vh] left-0"}`}
+    >
+      <ambientLight intensity={0.5} />
+      <Environment preset="city" />
 
-export default Canvas3D;
+      <CameraRig>
+        {/* <Backdrop /> */}
+        <Center>
+          <Shirt />
+        </Center>
+      </CameraRig>
+    </Canvas>
+  );
+};
+
+export default CanvasModel;

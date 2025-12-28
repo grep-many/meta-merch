@@ -3,7 +3,7 @@ import Customizer from "./pages/Customizer.page";
 import Canvas3D from "./canvas";
 
 const App = () => (
-  <main>
+  <main className="min-h-screen overflow-hidden">
     <Home />
     <Canvas3D />
     <Customizer />

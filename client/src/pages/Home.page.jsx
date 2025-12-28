@@ -8,6 +8,7 @@ import {
 } from "@/config/motion";
 import state from "@/store";
 import { Button } from "@/components";
+import { threejsIcon } from "@/assets";
 
 const Home = () => {
   const { intro } = useSnapshot(state);
@@ -15,9 +16,9 @@ const Home = () => {
   return (
     <AnimatePresence>
       {intro && (
-        <motion.section className="home" {...slideAnimation("left")}>
+        <motion.section className="home w-screen" {...slideAnimation("left")}>
           <motion.header {...slideAnimation("down")}>
-            <img src="/threejs.png" alt="logo" className="size-8 object-contain" />
+            <img src={threejsIcon} alt="logo" className="size-8 object-contain" />
           </motion.header>
           <motion.div className="home-content" {...headContainerAnimation}>
             <motion.div {...headTextAnimation}>
