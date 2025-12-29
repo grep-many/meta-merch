@@ -19,7 +19,7 @@ const Shirt = () => {
         castShadow
         geometry={nodes.T_Shirt_male.geometry}
         material={materials.lambert1}
-        material-roughness={1}
+        materialRoughness={1}
         dispose={null}
       >
         {isFullTexture && (
@@ -31,7 +31,7 @@ const Shirt = () => {
             rotation={[0, 0, 0]}
             scale={0.15}
             map={logoTexture}
-            map-anistrophy={16}
+            mapAnistrophy={16}
             depthTest={false}
             depthWrite={true}
           />
