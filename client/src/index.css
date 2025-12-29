@@ -26,7 +26,7 @@ html {
 }
 
 @utility head-text {
-  @apply text-[6rem] leading-[7rem] font-black text-black xl:text-[10rem] xl:leading-[11rem];
+  @apply text-[6rem] leading-28 font-black text-black xl:text-[10rem] xl:leading-44;
 }
 
 @utility download-btn {
@@ -34,7 +34,7 @@ html {
 }
 
 @utility editortabs-container {
-  @apply glassmorphism ml-1 flex w-16 flex-col items-center justify-center gap-4 rounded-lg border-[2px] py-4;
+  @apply glassmorphism ml-1 flex w-16 flex-col items-center justify-center gap-4 rounded-lg border-2 py-4;
 }
 
 @utility filtertabs-container {
@@ -42,7 +42,7 @@ html {
 }
 
 @utility aipicker-container {
-  @apply glassmorphism absolute left-full ml-3 flex h-[220px] w-[195px] flex-col gap-4 rounded-md p-3;
+  @apply glassmorphism absolute left-full ml-3 flex h-55 w-48.75 flex-col gap-4 rounded-md p-3;
 }
 
 @utility aipicker-textarea {
@@ -50,7 +50,7 @@ html {
 }
 
 @utility filepicker-container {
-  @apply glassmorphism absolute left-full ml-3 flex h-[220px] w-[195px] flex-col rounded-md p-3;
+  @apply glassmorphism absolute left-full ml-3 flex h-55 w-48.75 flex-col rounded-md p-3;
 }
 
 @utility filepicker-label {

@@ -1,7 +1,7 @@
 import state from "@/store";
 import { useSnapshot } from "valtio";
 
-const Tab = ({ tab, isFilterTab, isActiveTab, handleClick }) => {
+const Tab = ({ tab, isFilterTab, isActiveTab, handleClick, className = "" }) => {
   const { color } = useSnapshot(state);
   const activeStyles =
     isFilterTab && isActiveTab
@@ -10,7 +10,7 @@ const Tab = ({ tab, isFilterTab, isActiveTab, handleClick }) => {
 
   return (
     <div
-      className={`tab-btn duration-200 hover:-rotate-20 even:hover:rotate-20 ${isFilterTab ? "glassmorphism rounded-full" : "rounded-4xl"}`.trim()}
+      className={`tab-btn duration-200 hover:-rotate-20 even:hover:rotate-20 ${isFilterTab ? "glassmorphism rounded-full" : "rounded-4xl"} ${className}`.trim()}
       onClick={handleClick}
       style={activeStyles}
     >

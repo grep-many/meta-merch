@@ -31,7 +31,7 @@ const Shirt = () => {
             rotation={[0, 0, 0]}
             scale={0.15}
             map={logoTexture}
-            mapAnistrophy={16}
+            anistrophy={16}
             depthTest={false}
             depthWrite={true}
           />
