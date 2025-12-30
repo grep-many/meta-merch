@@ -23,7 +23,7 @@ const Button = ({ variant = "", children, className = "", ...props }) => {
 
   return (
     <button
-      className={`flex-1 cursor-pointer rounded-md px-2 py-1.5 ${className}`.trim()}
+      className={`flex-1 cursor-pointer rounded-md px-2 py-1.5 z-11 ${className}`.trim()}
       style={generateStyle(variant)}
       {...props}
     >
