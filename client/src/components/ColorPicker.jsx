@@ -4,7 +4,9 @@ import { useSnapshot } from "valtio";
 import state from "@/store";
 
 const ColorPicker = () => {
-  const { color } = useSnapshot(state);
+  const { color, intro } = useSnapshot(state);
+
+  if (intro) return;
 
   return (
     <div className="absolute left-full ml-3">

@@ -11,7 +11,7 @@ import { fadeAnimation, slideAnimation } from "../config/motion";
 import { AIPicker, ColorPicker, Button, FilePicker, Tab } from "../components";
 
 const Customizer = () => {
-  const snap = useSnapshot(state);
+  const { intro } = useSnapshot(state);
 
   const [file, setFile] = useState("");
 
@@ -51,15 +51,18 @@ const Customizer = () => {
     try {
       setGeneratingImg(true);
 
-      const response = await fetch("http://localhost:8080/api/v1/dalle", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        config[import.meta.env.MODE === "development" ? "development" : "production"].backendUrl,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            prompt,
+          }),
         },
-        body: JSON.stringify({
-          prompt,
-        }),
-      });
+      );
 
       const data = await response.json();
 
@@ -114,7 +117,7 @@ const Customizer = () => {
 
   return (
     <AnimatePresence>
-      {!snap.intro && (
+      {!intro && (
         <>
           <motion.div
             key="custom"
@@ -122,7 +125,7 @@ const Customizer = () => {
             {...slideAnimation("left")}
           >
             <div className="flex min-h-screen items-center">
-              <div className="editortabs-container tabs">
+              <div className="editortabs-container">
                 {EditorTabs.map((tab) => (
                   <Tab key={tab.name} tab={tab} handleClick={() => setActiveEditorTab(tab.name)} />
                 ))}

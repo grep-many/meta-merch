@@ -1,7 +1,11 @@
-import React from "react";
 import Button from "./Button";
+import { useSnapshot } from "valtio";
+import state from "@/store";
 
 const FilePicker = ({ file, setFile, readFile }) => {
+  const { intro } = useSnapshot(state);
+  if (intro) return;
+
   return (
     <div className="filepicker-container">
       <div className="flex flex-1 flex-col">
