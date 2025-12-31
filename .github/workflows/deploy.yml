@@ -1,0 +1,88 @@
+name: meta-merch-client-workflow
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: meta-merch-client-workflow
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      VITE_API_URL: ${{ secrets.VITE_API_URL }}
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: install dependencies
+        run: |
+          cd client 
+          npm ci
+
+      - name: Validate required environment variables
+        run: |
+          cd client
+          REQUIRED_VARS=(
+            VITE_API_URL
+          )
+
+          for VAR in "${REQUIRED_VARS[@]}"; do
+            if [ -z "${!VAR}" ]; then
+              echo "❌ ERROR: Required environment variable '$VAR' is not set."
+              exit 1
+            fi
+          done
+
+          echo "✅ All required environment variables are set."
+          
+      - name: Create .env file for Vite
+        run: |
+          cd client
+
+          cat <<EOF > .env
+          VITE_API_URL=${VITE_API_URL}
+          EOF
+
+          echo "✅ .env file created"
+          echo "---- .env (keys only) ----"
+          sed 's/=.*$/=***/' .env
+
+      - name: Build the VITE app
+        run: |
+          cd client 
+          npm run build
+
+      - name: Create 404.html for SPA routing
+        run: |
+          cd client
+          cp dist/index.html dist/404.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./client/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploying to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
