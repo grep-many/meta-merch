@@ -1,6 +1,6 @@
 
 <h1>
-  <img src="./client/public/vite.svg" alt="Meta Merch Logo" width="40" style="vertical-align: middle;" />
+  <img src="./client/public/apple-touch-icon.png" alt="Meta Merch Logo" width="40" style="vertical-align: middle;" />
   Meta Merch — AI Powered 3D T‑Shirt Customizer
 </h1>
 
