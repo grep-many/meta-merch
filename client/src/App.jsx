@@ -1,6 +1,8 @@
-import Home from "@/pages/Home.page";
-import Customizer from "./pages/Customizer.page";
-import Canvas3D from "./canvas";
+import React from "react";
+
+const Home = React.lazy(() => import("@/pages/Home.page"));
+const Customizer = React.lazy(() => import("@/pages/Customizer.page"));
+const Canvas3D = React.lazy(()=>import("@/canvas"))
 
 const App = () => (
   <main className="min-h-screen overflow-hidden">
