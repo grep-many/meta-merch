@@ -3,13 +3,28 @@ import { SketchPicker } from "react-color";
 import { useSnapshot } from "valtio";
 import state from "@/store";
 
-const ColorPicker = () => {
+const ColorPicker = ({ setActiveEditorTab }) => {
   const { color, intro } = useSnapshot(state);
 
   if (intro) return;
 
+  const ref = React.useRef(null);
+
+  React.useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setActiveEditorTab(""); // close picker
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="absolute left-full ml-3">
+    <div ref={ref} className="absolute left-full ml-3">
       <SketchPicker
         color={color}
         disableAlpha

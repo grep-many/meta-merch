@@ -1,12 +1,30 @@
 import { useSnapshot } from "valtio";
 import Button from "./ui/Button";
 import state from "@/store";
+import React from "react";
 
-const AIPicker = ({ prompt, setPrompt, generatingImg, handleSubmit }) => {
+const AIPicker = ({ prompt, setPrompt, setActiveEditorTab, generatingImg, handleSubmit }) => {
   const { intro } = useSnapshot(state);
+
   if (intro) return;
+
+  const ref = React.useRef(null);
+
+  React.useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setActiveEditorTab(""); // close picker
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="aipicker-container">
+    <div ref={ref} className="aipicker-container">
       <textarea
         placeholder="Ask AI..."
         className="aipicker-textarea resize-none"
